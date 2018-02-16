@@ -1,0 +1,56 @@
+{% set name = "zipline" %}
+{% set version = "1.1.1" %}
+{% set sha256 = "10b00c15be535fc7e848ad7765f64f9d39f15b15188402dd4520b565e1ac0d1a" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  fn: {{ name }}-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: {{ sha256 }}
+
+build:
+  noarch: python
+  number: 0
+  script: python -m pip install --no-deps --ignore-installed .
+
+requirements:
+  build:
+    - python
+    - pip
+  run:
+    - python
+    - ipython >=3.2.3
+    - matplotlib >=1.4.0
+    - numpy >=1.9.1
+    - pandas >=0.19.0
+    - pytz >=2014.10
+    - scipy >=0.14.0
+    - scikit-learn >=0.18.2
+    - seaborn >=0.7.1
+    - pandas-datareader >=0.2
+    - empyrical >=0.3.2
+    - pymc3 >=3.1
+
+test:
+  imports:
+    - zipline
+    - zipline.testing
+
+about:
+  home: http://www.zipline.io/
+  license: Apache 2.0
+  license_family: Apache
+  license_file: LICENSE
+  summary: 'Zipline, a Pythonic Algorithmic Trading Library'
+
+  description: |
+    Zipline is a Pythonic algorithmic trading library. It is an event-driven system for backtesting. Zipline is currently used in production as the backtesting and live-trading engine powering Quantopian -- a free, community-centered, hosted platform for building and executing trading strategies.
+  doc_url: http://www.zipline.io/
+  dev_url: https://github.com/quantopian/zipline
+
+extra:
+  recipe-maintainers:
+    - alen12345
